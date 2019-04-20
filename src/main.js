@@ -12,10 +12,10 @@ $(document).ready(function() {
     $('#matchingFurnitures').html("");
     type = $('#type').val();
 
-    showResult();
+    showResults();
   })
 
-function showResult() {
+function showResults() {
   let furnitureStore = new FurnitureStore();
   let promise1 = furnitureStore.getFurnitures();
 
@@ -23,7 +23,7 @@ function showResult() {
     let body = JSON.parse(response);
     let furnitures = body.data;
     if (type != "") {
-      furniture = furnitureStore.filterByType(furnitures, type);
+      furnitures = furnitureStore.filterByType(furnitures, type);
     }
 
     let html = '';
@@ -35,12 +35,13 @@ function showResult() {
         html += getFurnitureDetailHtml(furnitures[i]);
       }
     }
+
     $('#matchingFurnitures').html(html);
   });
 }
 
 function getFurnitureDetailHtml(furniture) {
-
+  let data = furniture.datas[0];
   let html =
   `<div>
     <div>${furniture.name}</div>
