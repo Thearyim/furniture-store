@@ -3,7 +3,7 @@ export default class FurnitureStore {
     return new Promise(function(resolve, reject) {
       let request = new XMLHttpRequest();
       let url = `https://it771mq5n2.execute-api.us-west-2.amazonaws.com/production/furniture`
-
+      console.log("sending furniture store request");
       request.onload = function() {
         if (this.status === 200) {
           resolve(request.response);
@@ -20,15 +20,11 @@ export default class FurnitureStore {
   filterByType(furnitures, type) {
     let matchingFurnitures = [];
     for (let i = 0 ; i < furnitures.length ; i++) {
-      let furnitureType = furnitures[i].type[0];
+      let furnitureType = furnitures[i].type;
       let typeTerms = this.splitTerms(type);
-      for (let j = 0 ; j < typeTerms.length ; j++) {
-        if (furnitureType.includes(typeTerms[j])) {
+        if (typeTerms.includes(furnitureType)) {
           matchingFurnitures.push(furnitures[i]);
-          break;
         }
-      }
-
     }
     return matchingFurnitures;
   }

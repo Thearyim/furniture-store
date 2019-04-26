@@ -34,6 +34,17 @@ module.exports = {
         ]
       },
       {
+        test: /\.(png|jp(e*)g|svg)$/,
+        use: [{
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: 'img/'
+            }
+          }
+        ]
+      },
+      {
         test: /\.js$/,
         exclude: [
           /node_modules/,
